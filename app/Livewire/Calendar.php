@@ -6,8 +6,8 @@ use Livewire\Component;
 
 class Calendar extends Component
 {
-    public $year ;
-    public $month ;
+    public $year ="2023" ;
+    public $month ="February" ;
 
     public function render()
     {
@@ -22,18 +22,26 @@ class Calendar extends Component
     }
     private function getDaysInMonth(){
 
+$firstDay = $this->year .'-' .$this->month . '-01';
+$dayOfWeek = date('w',strtotime($firstDay));
+$days = [];
+for($i =0 ;$i < $dayOfWeek -1; $i =$i +1){
+    $days[] = '';
+}
+$numberOfDays = date('t',strtotime($firstDay));
+for($i =0 ;$i < $numberOfDays -1; $i =$i +1){
+    $days[] = ($i +1);
+}
 
+$lastDay = $this->year . '-' . $this->month . '-' . $numberOfDays;
+$lastDayOfWeek = date('w',strtotime($lastDay));
+$colsToAdd = 7 -$lastDayOfWeek;
+for($i =0 ;$i < $colsToAdd; $i =$i +1){
 
+$days[] ='';
+}
+        return $days;
 
-        return
-        [
-        1,2,3,4,5,6,7,
-        8,9,10,11,12,13,14,
-        15,16,17,18,19,20,21,
-        22,23,24,25,26,27,28,
-        29,30,31,1,2,3,4,
-        5,6,7,8,9,10
-        ];
     }
 }
 
