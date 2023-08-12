@@ -83,7 +83,9 @@
     <div class="grid grid-cols-7 gap-1  px-4 ">
       @foreach ($days as $day)
         @if(!empty($day))
-          <div class="aspect-square  flex items-center justify-center border border-1 h-10 w-12 rounded-sm  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C] text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through  @endif">
+          <div class="aspect-square  flex items-center justify-center border border-1 h-10 w-12 rounded-sm  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $monthNumber) border-[#00665C] text-[#00665C] font-semibold
+          @elseif ($day["day"] < $today && $day["month"] < $monthNumber ) line-through
+            @elseif ($day["month"] == $monthNumber ) bg-red-400 @endif">
             {{ $day["day"] }}
           </div>
         @else
