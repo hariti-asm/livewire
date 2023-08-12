@@ -1,53 +1,59 @@
 <?php
-
 namespace App\Livewire;
 
 use Livewire\Component;
 
 class Calendar extends Component
 {
-    public $year ="2023" ;
-    public $month ="February" ;
+    public $year = "2023";
+    public $month = "Augest";
 
     public function render()
     {
-
-        return view('livewire.calendar',[
+        return view('livewire.calendar', [
             'year' => $this->year,
-            'month' =>$this->month,
+            'month' => $this->month,
             'days' => $this->getDaysInMonth()
-        ]
-
-        );
+        ]);
     }
-    private function getDaysInMonth(){
 
-$firstDay = $this->year .'-' .$this->month . '-01';
-$dayOfWeek = date('w',strtotime($firstDay));
-$days = [];
-for($i =0 ;$i < $dayOfWeek -1; $i =$i +1){
-    $days[] = '';
-}
-$numberOfDays = date('t',strtotime($firstDay));
-for($i =0 ;$i < $numberOfDays -1; $i =$i +1){
-    $days[] = ($i +1);
-}
+    private function getDaysInMonth()
+    {
+        $firstDay = $this->year . '-' . $this->month . '-01';
+        $dayOfWeek = date('w', strtotime($firstDay));
+        $days = [];
 
-$lastDay = $this->year . '-' . $this->month . '-' . $numberOfDays;
-$lastDayOfWeek = date('w',strtotime($lastDay));
-$colsToAdd = 7 -$lastDayOfWeek;
-for($i =0 ;$i < $colsToAdd; $i =$i +1){
+        // Calculate how many days from the previous month need to be shown
+        $daysInPrevMonth = date('t', strtotime('-1 month', strtotime($firstDay)));
+        $prevMonthStart = $daysInPrevMonth - $dayOfWeek + 2;
 
-$days[] ='';
-}
+        for ($i = $prevMonthStart; $i <= $daysInPrevMonth; $i++) {
+            $days[] = $i;
+        }
+
+        $numberOfDays = date('t', strtotime($firstDay));
+
+        for ($i = 1; $i <= $numberOfDays; $i++) {
+            $days[] = $i;
+        }
+
+        // Calculate how many days from the next month need to be shown
+        $totalDays = count($days);
+        $remainingCols = (7 - ($totalDays % 7)) % 7;
+
+        // Fill in the remaining days from the next month
+        $nextMonthDay = 1;
+        for ($i = 1; $i <= $remainingCols; $i++) {
+            $days[] = $nextMonthDay;
+            $nextMonthDay++;
+        }
+
+        // Add extra row of numbers from the next month
+        for ($i = 1; $i <= 7; $i++) {
+            $days[] = $nextMonthDay;
+            $nextMonthDay++;
+        }
+
         return $days;
-
     }
 }
-
-
-
-
-
-
-
