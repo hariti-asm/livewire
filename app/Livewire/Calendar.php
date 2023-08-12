@@ -6,7 +6,7 @@ use Livewire\Component;
 class Calendar extends Component
 {
     public $year = "2023";
-    public $month = "Augest";
+    public $month = 7;
     public $selectedMonth;
     public $selectedYear;
     public $today;
@@ -32,13 +32,15 @@ class Calendar extends Component
         $prevMonthStart = $daysInPrevMonth - $dayOfWeek + 2;
 
         for ($i = $prevMonthStart; $i <= $daysInPrevMonth; $i++) {
-            $days[] = $i;
+            $days[] = ["day"=>$i,"month"=> $this->month -1];
         }
 
         $numberOfDays = date('t', strtotime($firstDay));
 
         for ($i = 1; $i <= $numberOfDays; $i++) {
-            $days[] = $i;
+
+            $days[] = ["day"=>$i,"month"=>$this->month];
+
         }
 
         // Calculate how many days from the next month need to be shown
@@ -48,13 +50,14 @@ class Calendar extends Component
         // Fill in the remaining days from the next month
         $nextMonthDay = 1;
         for ($i = 1; $i <= $remainingCols; $i++) {
-            $days[] = $nextMonthDay;
+            $days[] = ["day"=>$i,"month"=>$this->month+1];
             $nextMonthDay++;
         }
 
         // Add extra row of numbers from the next month
         for ($i = 1; $i <= 7; $i++) {
-            $days[] = $nextMonthDay;
+            $days[] = ["day"=>$nextMonthDay,"month"=>$this->month +1];
+
             $nextMonthDay++;
         }
 
