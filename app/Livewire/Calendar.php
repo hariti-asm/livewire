@@ -7,13 +7,18 @@ class Calendar extends Component
 {
     public $year = "2023";
     public $month = "Augest";
+    public $selectedMonth;
+    public $selectedYear;
+    public $today;
+
 
     public function render()
     {
         return view('livewire.calendar', [
             'year' => $this->year,
             'month' => $this->month,
-            'days' => $this->getDaysInMonth()
+            'days' => $this->getDaysInMonth(),
+            'today' => $this->today = date('d')
         ]);
     }
 
@@ -22,7 +27,6 @@ class Calendar extends Component
         $firstDay = $this->year . '-' . $this->month . '-01';
         $dayOfWeek = date('w', strtotime($firstDay));
         $days = [];
-
         // Calculate how many days from the previous month need to be shown
         $daysInPrevMonth = date('t', strtotime('-1 month', strtotime($firstDay)));
         $prevMonthStart = $daysInPrevMonth - $dayOfWeek + 2;

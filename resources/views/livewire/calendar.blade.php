@@ -13,12 +13,14 @@
           </div>
 
           <div class="flex justify-between bg-[#EEF6F2]  mx-4 my-1 rounded-md ">
+            <span class=" w-0 h-0
+            border-t-[20px] border-t-transparent
+            border-l-[20px] border-l-[#00665C]
+            border-b-[20px] border-b-transparent"></span>
             <button class="  bg-[#00665C] flex justify-center items-center w-16 h-8 rounded-md"
-             {{-- w-0 h-0
-            border-t-[25px] border-t-transparent
-            border-l-[25px] border-l-[#00665C]
-            border-b-[25px] border-b-transparent" --}}
+
             >
+
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e1o0hyrj0">
                     <g fill="#FFFFFF" fill-rule="evenodd">
                     <g fill-rule="evenodd">
@@ -26,6 +28,7 @@
 
                   <h2 class="text-white">Date</h2>
             </button>
+
             <button>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e21uslf0"><g fill-rule="evenodd"><path fill-rule="nonzero" d="M15.53 14.47a.75.75 0 0 1-1.06 1.06l-3-3a.75.75 0 0 1-.22-.53V6a.75.75 0 1 1 1.5 0v5.69l2.78 2.78Z"></path><path d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9m0 19.5C6.21 22.5 1.5 17.79 1.5 12S6.21 1.5 12 1.5 22.5 6.21 22.5 12 17.79 22.5 12 22.5"></path></g></svg>
 
@@ -65,7 +68,7 @@
 
 
 
-    <div class="grid grid-cols-7 text-center  px-4 mt-4 mb-6">
+    <div class="grid grid-cols-7 text-center  px-4 mt-4 mb-4">
       <div class="text-sm">MON</div>
       <div class="text-sm">TUE</div>
       <div class="text-sm">WED</div>
@@ -80,7 +83,7 @@
     <div class="grid grid-cols-7 gap-1  px-4 ">
       @foreach ($days as $day)
         @if(!empty($day))
-          <div class="aspect-square  flex items-center justify-center border border-1 h-10 w-12 rounded-sm  px-1 hover:border-[#00665C] hover:text-[#00665C]">
+          <div class="aspect-square  flex items-center justify-center border border-1 h-10 w-12 rounded-sm  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day == $today) border-[#00665C] text-[#00665C] font-semibold @elseif ($day < $today ))  line-through  @endif">
             {{ $day }}
           </div>
         @else
