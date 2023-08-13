@@ -7,8 +7,8 @@
         </div>
         <div class="w-full h-px  bg-gray-100"></div>
         <div class="flex justify-center items-center py-1 rounded-full my-1">
-            <span class="bg-[#bed9ed] inline-block px-2 rounded-full">
-              <span class="text-sm">🔥 Already <b class="font-semibold">22 bookings</b> today</span>
+            <span class="bg-[#bed9ed] inline-block px-2 rounded-full mx-auto ">
+              <span class="text-sm text-center">🔥 Already <b class="font-semibold">22 bookings</b> today</span>
             </span>
           </div>
 
@@ -59,7 +59,7 @@
         </div>
         <div class="w-full h-px  bg-gray-100"></div>
         <div class="flex justify-between mx-4 my-2">
-            <button class="@if ($selectedMonth > $monthNumber ) bg-[#9ccac6]
+            <button class="@if ($selectedMonth > $month ) bg-[#9ccac6]
 
             @endif" wire:click="Previous">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 ejhntxf0"><path fill-rule="evenodd" d="M15.749 20.5c-.24 0-.48-.086-.673-.26l-8.249-7.496a1 1 0 0 1 0-1.479l8.249-7.504a1 1 0 0 1 1.346 1.478l-7.436 6.765 7.436 6.756a1.002 1.002 0 0 1-.673 1.74" ></path></svg>
@@ -89,7 +89,8 @@
     <div class="grid grid-cols-7 gap-1  px-4 ">
       @foreach ($days as $day)
         @if(!empty($day))
-          <div class="aspect-square  flex items-center justify-center border border-1 h-10 w-12 rounded-sm  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C] text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through disabled cursor-not-allowed border-none  @endif ">
+          <div class="aspect-square  flex items-center justify-center border border-1 h-10 w-12 rounded-sm  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C]  text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through disabled cursor-not-allowed border-none  @endif
+          @if($day["day"] < $today &&  $day["month"] > $month )  bg-white text-[#5a606c] opacity-75 @endif">
             {{ $day["day"] }}
           </div>
         @else
