@@ -6,15 +6,11 @@ use Livewire\Component;
 class Calendar extends Component
 {
     public $year = "2023";
-<<<<<<< HEAD
     public $month = 8;
-=======
-
->>>>>>> 2be030ab0c045d2de580b64ef2a7f6b451e70dda
     public $selectedMonth;
     public $selectedYear;
     public $today;
-    public $month = "September";
+    // public $month = "September";
      public $monthNumber ;
 
 
@@ -59,20 +55,20 @@ class Calendar extends Component
         $firstDay = $this->year . '-' . (int)$this->monthNumber. '-01';
         $dayOfWeek = date('w', strtotime($firstDay));
         $days = [];
-        $percentage = 50%;
+        $percentage = "50%";
         // Calculate how many days from the previous month need to be shown
         $daysInPrevMonth = date('t', strtotime('-1 month', strtotime($firstDay)));
         $prevMonthStart = $daysInPrevMonth - $dayOfWeek + 2;
 
         for ($i = $prevMonthStart; $i <= $daysInPrevMonth; $i++) {
-            $days[] = ["day"=>$i,"month"=>(int)$this->monthNumber -1];
+            $days[] = ["day"=>$i,"month"=>$this->month -1];
         }
 
         $numberOfDays = date('t', strtotime($firstDay));
 
         for ($i = 1; $i <= $numberOfDays; $i++) {
 
-            $days[] = ["day"=>$i,"month"=>(int)$this->monthNumber];
+            $days[] = ["day"=>$i,"month"=>$this->month];
 
         }
 
@@ -83,13 +79,13 @@ class Calendar extends Component
         // Fill in the remaining days from the next month
         $nextMonthDay = 1;
         for ($i = 1; $i <= $remainingCols; $i++) {
-            $days[] = ["day"=>$i,"month"=>(int)$this->monthNumber +1];
+            $days[] = ["day"=>$i,"month"=>$this->month +1];
             $nextMonthDay++;
         }
 
         // Add extra row of numbers from the next month
         for ($i = 1; $i <= 7; $i++) {
-            $days[] = ["day"=>$nextMonthDay,"month"=>(int)$this->monthNumber +1];
+            $days[] = ["day"=>$nextMonthDay,"month"=>$this->month +1];
 
             $nextMonthDay++;
         }
