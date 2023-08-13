@@ -11,13 +11,17 @@ class Calendar extends Component
     public $selectedYear;
     public $today;
     public $days =[];
+    public $disabledMonth;
 
 public function mount(){
-    $this->year =date('Y');
-    $this->month=date('m');
-    $this->today = date('d');
-    $this->selectedMonth = date('m');
-    $this->days =$this->getDaysInMonth();
+$this->year =date('Y');
+$this->month=date('m');
+$this->today = date('d');
+$this->selectedMonth = date('m');
+$this->days =$this->getDaysInMonth();
+$this->disableddMonth = date('m') -1;
+
+
 
 }
     public function render()
@@ -25,19 +29,34 @@ public function mount(){
         return view('livewire.calendar');
 
     }
-    public function next(){
 
-        $this->selectedMonth += 1;
+    public function next() {
+        $this->year = date('Y');
+        $this->selectedMonth = $this->selectedMonth + 1;
 
+        if ($this->selectedMonth > 12) {
+            $this->selectedMonth = 1;
+            $this->year++;
+        }
+
+        $this->days = $this->getDaysInMonth();
     }
-    public function previous(){
+
+    public function previous() {
         $this->selectedMonth -= 1;
 
+        if ($this->selectedMonth < 1) {
+            $this->selectedMonth = 12;
+            $this->year--;
+        }
+
+        $this->days = $this->getDaysInMonth();
     }
+
 
     private function getDaysInMonth()
     {
-        $firstDay = $this->year . '-' . $this->month . '-01';
+        $firstDay = $this->year . '-' . $this->selectedMonth . '-01';
         $dayOfWeek = date('w', strtotime($firstDay));
         $days = [];
         $percentage = 50;
@@ -46,14 +65,14 @@ public function mount(){
         $prevMonthStart = $daysInPrevMonth - $dayOfWeek + 2;
 
         for ($i = $prevMonthStart; $i <= $daysInPrevMonth; $i++) {
-            $days[] = ["day"=>$i,"month"=> $this->  month -1];
+            $days[] = ["day"=>$i,"month"=> $this->  selectedMonth -1];
         }
 
         $numberOfDays = date('t', strtotime($firstDay));
 
         for ($i = 1; $i <= $numberOfDays; $i++) {
 
-            $days[] = ["day"=>$i,"month"=>$this->month];
+            $days[] = ["day"=>$i,"month"=>$this->selectedMonth];
 
         }
 
@@ -64,13 +83,13 @@ public function mount(){
         // Fill in the remaining days from the next month
         $nextMonthDay = 1;
         for ($i = 1; $i <= $remainingCols; $i++) {
-            $days[] = ["day"=>$i,"month"=>$this->month+1];
+            $days[] = ["day"=>$i,"month"=>$this->selectedMonth+1];
             $nextMonthDay++;
         }
 
         // Add extra row of numbers from the next month
         for ($i = 1; $i <= 7; $i++) {
-            $days[] = ["day"=>$nextMonthDay,"month"=>$this->month +1];
+            $days[] = ["day"=>$nextMonthDay,"month"=>$this->selectedMonth +1];
 
             $nextMonthDay++;
         }
