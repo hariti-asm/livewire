@@ -6,7 +6,7 @@ use Livewire\Component;
 class Calendar extends Component
 {
     public $year = "2023";
-    public $month = 7;
+    public $month = 8;
     public $selectedMonth;
     public $selectedYear;
     public $today;

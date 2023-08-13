@@ -23,7 +23,7 @@
                     <g fill-rule="evenodd">
                     <path d="M22.5 7.5V3.75a.75.75 0 0 0-.75-.75H18V1.5a.75.75 0 0 0-1.5 0V3h-9V1.5a.75.75 0 0 0-1.5 0V3H2.25a.75.75 0 0 0-.75.75V7.5h21Z"></path><path d="M17.25 14.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm0 3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm-4.5-3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm0 3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm-4.5-3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm0 3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM1.5 9v12.75c0 .414.336.75.75.75h19.5a.75.75 0 0 0 .75-.75V9h-21Z"></path></g></svg>
 
-                  <h2 class="text-white">Date</h2>
+                  <h2 class="text-white pl-[6px]">Date</h2>
             </button>
             <span class="absolute inset-0 -z-1 border-t-[16px] border-t-transparent border-l-[16px] border-l-[#00665C] border-b-[16px] border-b-transparent rounded-r-md"></span>
 
@@ -69,13 +69,13 @@
 
 
     <div class="grid grid-cols-7 text-center  px-4 mt-4 mb-4">
-      <div class="text-sm">MON</div>
-      <div class="text-sm">TUE</div>
-      <div class="text-sm">WED</div>
-      <div class="text-sm">THU</div>
-      <div class="text-sm">FRI</div>
-      <div class="text-sm">SAT</div>
-      <div class="text-sm">SUN</div>
+      <div class="text-[11px]">MON</div>
+      <div class="text-[11px]">TUE</div>
+      <div class="text-[11px]">WED</div>
+      <div class="text-[11px]">THU</div>
+      <div class="text-[11px]">FRI</div>
+      <div class="text-[11px]">SAT</div>
+      <div class="text-[11px]">SUN</div>
     </div>
 
 
@@ -83,7 +83,7 @@
     <div class="grid grid-cols-7 gap-1  px-4 ">
       @foreach ($days as $day)
         @if(!empty($day))
-          <div class="aspect-square  flex items-center justify-center border border-1 h-10 w-12 rounded-sm  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C] text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through  @endif">
+          <div class="aspect-square  flex items-center justify-center border border-1 h-10 w-12 rounded-sm  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C] text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through disabled cursor-not-allowed border-none  @endif ">
             {{ $day["day"] }}
           </div>
         @else
