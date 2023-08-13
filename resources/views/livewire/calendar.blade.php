@@ -89,14 +89,14 @@
     <div class="grid grid-cols-7 gap-1  px-4 ">
       @foreach ($days as $day)
         @if(!empty($day))
-          <div class="aspect-square  flex items-center justify-center border border-1 h-10 w-12 rounded-sm  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C]  text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through disabled cursor-not-allowed border-none  @endif
-          @if($day["day"] < $today &&  $day["month"] > $month )  bg-white text-[#5a606c] opacity-75 @endif">
-            {{ $day["day"] }}
-          </div>
-        @else
-          <div class="aspect-square  flex items-center justify-center bg-gray-200 hover:border-[#00665C] hover:text-[#00665C]">
-            {{ $day["day"] }}
-          </div>
+        <div class="aspect-square gap-1 flex items-center justify-center border border-1 h-10 w-12 rounded-[4px]  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C]  text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through disabled cursor-not-allowed border-none  @endif
+        @if($day["day"] < $today &&  $day["month"] > $month )  bg-white text-[#5a606c] opacity-75 @endif">
+          {{ $day["day"] }}
+        </div>
+      @else
+        <div class="aspect-square  flex items-center justify-center bg-gray-200 hover:border-[#00665C] hover:text-[#00665C]">
+          {{ $day["day"] }}
+        </div>
         @endif
       @endforeach
     </div>

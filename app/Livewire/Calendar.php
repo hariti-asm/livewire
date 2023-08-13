@@ -37,6 +37,7 @@ class Calendar extends Component
         $firstDay = $this->year . '-' . $this->month . '-01';
         $dayOfWeek = date('w', strtotime($firstDay));
         $days = [];
+        $percentage = 50;
         // Calculate how many days from the previous month need to be shown
         $daysInPrevMonth = date('t', strtotime('-1 month', strtotime($firstDay)));
         $prevMonthStart = $daysInPrevMonth - $dayOfWeek + 2;
@@ -69,6 +70,9 @@ class Calendar extends Component
             $days[] = ["day"=>$nextMonthDay,"month"=>$this->month +1];
 
             $nextMonthDay++;
+        }
+        foreach ($days as &$day) {
+            $day['percentage'] = $percentage;
         }
 
         return $days;
