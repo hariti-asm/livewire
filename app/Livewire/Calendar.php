@@ -5,29 +5,32 @@ use Livewire\Component;
 
 class Calendar extends Component
 {
-    public $year = "2023";
-    public $month = 8;
+    public $year ;
+    public $month ;
     public $selectedMonth;
     public $selectedYear;
     public $today;
+    public $days =[];
 
+public function mount(){
+    $this->year =date('Y');
+    $this->month=date('m');
+    $this->today = date('d');
+    $this->selectedMonth = date('m');
+    $this->days =$this->getDaysInMonth();
 
+}
     public function render()
     {
-        return view('livewire.calendar', [
-            'year' => $this->year,
-            'month' => $this->month,
-            'days' => $this->getDaysInMonth(),
-            'today' => $this->today = date('d'),
-            'selectedMonth' => $this->selectedMonth = date('m')
-        ]);
+        return view('livewire.calendar');
+
     }
-    public function Next(){
+    public function next(){
 
         $this->selectedMonth += 1;
 
     }
-    public function Previous(){
+    public function previous(){
         $this->selectedMonth -= 1;
 
     }
