@@ -25,7 +25,7 @@
 
                   <h2 class="text-white pl-[6px]">Date</h2>
             </button>
-            <span class="absolute inset-0 -z-1 border-t-[16px] border-t-transparent border-l-[16px] border-l-[#00665C] border-b-[16px] border-b-transparent rounded-r-md"></span>
+            <span class="absolute border-t-[16px] border-t-transparent border-l-[16px] border-l-[#00665C] border-b-[16px] border-b-transparent rounded-r-md"></span>
 
 
         </div>
@@ -50,21 +50,27 @@
                         <path fill-rule="evenodd" d="M8.25 20.5a1.002 1.002 0 0 1-.673-1.74l7.436-6.756-7.436-6.765a1 1 0 1 1 1.346-1.478l8.249 7.504a1 1 0 0 1 0 1.479L8.923 20.24c-.193.174-.433.26-.673.26"></path></svg>
 
             </button>
-            <button class="mr-10">
+            <button class="mr-10 @if ($selectedMonth < $month) disabled
+
+            @endif" wire:click="Previous">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 eds1gnx0"><g fill-rule="evenodd"><path d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9m0 19.5C6.21 22.5 1.5 17.79 1.5 12S6.21 1.5 12 1.5 22.5 6.21 22.5 12 17.79 22.5 12 22.5"></path><path d="M14.5 14a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm2.273-6.773a.75.75 0 0 1 0 1.06l-8.485 8.486a.75.75 0 0 1-1.061-1.06l8.485-8.486a.75.75 0 0 1 1.061 0ZM9.5 7a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"></path></g></svg>
 
             </button>
         </div>
         <div class="w-full h-px  bg-gray-100"></div>
         <div class="flex justify-between mx-4 my-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 ejhntxf0"><path fill-rule="evenodd" d="M15.749 20.5c-.24 0-.48-.086-.673-.26l-8.249-7.496a1 1 0 0 1 0-1.479l8.249-7.504a1 1 0 0 1 1.346 1.478l-7.436 6.765 7.436 6.756a1.002 1.002 0 0 1-.673 1.74"></path></svg>
+            <button class="@if ($selectedMonth > $monthNumber ) bg-[#9ccac6]
 
+            @endif" wire:click="Previous">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 ejhntxf0"><path fill-rule="evenodd" d="M15.749 20.5c-.24 0-.48-.086-.673-.26l-8.249-7.496a1 1 0 0 1 0-1.479l8.249-7.504a1 1 0 0 1 1.346 1.478l-7.436 6.765 7.436 6.756a1.002 1.002 0 0 1-.673 1.74" ></path></svg>
+        </button>
     <h2 class="text-center font-semibold" >{{ $month }} - {{ $year }}</h2>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e10xbrur0"><path fill-rule="evenodd" d="M8.25 20.5a1.002 1.002 0 0 1-.673-1.74l7.436-6.756-7.436-6.765a1 1 0 1 1 1.346-1.478l8.249 7.504a1 1 0 0 1 0 1.479L8.923 20.24c-.193.174-.433.26-.673.26"></path></svg>
+        <button class="" wire:click="Next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e10xbrur0"><path fill-rule="evenodd" d="M8.25 20.5a1.002 1.002 0 0 1-.673-1.74l7.436-6.756-7.436-6.765a1 1 0 1 1 1.346-1.478l8.249 7.504a1 1 0 0 1 0 1.479L8.923 20.24c-.193.174-.433.26-.673.26"></path></svg>
+
+    </button>
 
 </div>
-
-
 
 
 
