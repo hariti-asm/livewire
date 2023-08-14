@@ -28,7 +28,7 @@ public function mount()
     $this->days = $this->getDaysInMonth();
     $this->month = date('n');
     $this->clickedDay = null;
-    $this->percentage = 50;
+    $this->percentage = "-50%";
 }
     public function render()
     {
@@ -38,9 +38,8 @@ public function mount()
 
 
 
-      public function next()
-      {
-        $this->year = date('Y');
+    public function next()
+    {
         $this->selectedMonth = $this->selectedMonth + 1;
 
         if ($this->selectedMonth > 12) {
@@ -50,25 +49,22 @@ public function mount()
 
         $this->selectedMonthName = date('M', mktime(0, 0, 0, $this->selectedMonth, 1)); // Update month abbreviation
         $this->days = $this->getDaysInMonth();
-      }
+    }
+
 
       public function previous()
-    {
-        $currentYear = date('Y');
-        $currentMonth = date('n'); //  numerical month value (1-12)
+      {
+          if ($this->selectedMonth > 1) {
+              $this->selectedMonth--;
+          } else {
+              $this->selectedMonth = 12;
+              $this->year--;
+          }
 
-        if ($this->selectedMonth > $currentMonth) {
-        $this->selectedMonth -= 1;
+          $this->selectedMonthName = date('M', mktime(0, 0, 0, $this->selectedMonth, 1)); // Update month abbreviation
+          $this->days = $this->getDaysInMonth();
+      }
 
-        if ($this->selectedMonth < 1) {
-            $this->selectedMonth = 12;
-            $this->year--;
-        }
-
-        $this->selectedMonthName = date('M', mktime(0, 0, 0, $this->selectedMonth, 1)); // Update month abbreviation
-        $this->days = $this->getDaysInMonth();
-        }
-    }
     public function dayClicked($day){
 
         $this->dayClicked =$day;
