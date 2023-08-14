@@ -15,17 +15,18 @@
 
           <div class="flex justify-between bg-[#EEF6F2]  mx-4 my-1 rounded-md ">
 <div class="flex relative">
-            <button class="  bg-[#00665C] flex justify-center items-center w-16 h-8 rounded-md  "
+    <button class="bg-[#00665C] flex justify-center items-center w-16 h-8 rounded-md" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e1o0hyrj0">
+            <g fill="#FFFFFF" fill-rule="evenodd">
+                <g fill-rule="evenodd">
+                    <path d="M22.5 7.5V3.75a.75.75 0 0 0-.75-.75H18V1.5a.75.75 0 0 0-1.5 0V3h-9V1.5a.75.75 0 0 0-1.5 0V3H2.25a.75.75 0 0 0-.75.75V7.5h21Z"></path>
+                    <path d="M17.25 14.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm0 3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm-4.5-3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm0 3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm-4.5-3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm0 3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM1.5 9v12.75c0 .414.336.75.75.75h19.5a.75.75 0 0 0 .75-.75V9h-21Z"></path>
+                </g>
+            </g>
+        </svg>
+        <h2 class="text-white pl-[6px]">Date</h2>
+    </button>
 
-            >
-
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e1o0hyrj0">
-                    <g fill="#FFFFFF" fill-rule="evenodd">
-                    <g fill-rule="evenodd">
-                    <path d="M22.5 7.5V3.75a.75.75 0 0 0-.75-.75H18V1.5a.75.75 0 0 0-1.5 0V3h-9V1.5a.75.75 0 0 0-1.5 0V3H2.25a.75.75 0 0 0-.75.75V7.5h21Z"></path><path d="M17.25 14.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm0 3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm-4.5-3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm0 3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm-4.5-3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5Zm0 3.5h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM1.5 9v12.75c0 .414.336.75.75.75h19.5a.75.75 0 0 0 .75-.75V9h-21Z"></path></g></svg>
-
-                  <h2 class="text-white pl-[6px]">Date</h2>
-            </button>
             <span class="absolute top-0 right-[-12px] border-t-[16px] border-t-transparent border-l-[16px] border-l-[#00665C] border-b-[16px] border-b-transparent rounded-md"></span>
 
 
@@ -87,14 +88,31 @@
     <div class="grid grid-cols-7 gap-1  px-4 ">
       @foreach ($days as $day)
         @if(!empty($day))
-        <div class="aspect-square gap-1 flex items-center justify-center border border-1 h-10 w-12 rounded-[4px]  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C]  text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through disabled cursor-not-allowed border-none bg-gray-100 text-[#959ba7]  @endif
-        @if($day["day"] < $today &&  $day["month"] > $month )  bg-white text-[#5a606c] opacity-75 @endif">
-          {{ $day["day"] }}
+
+        <div class="aspect-square gap-1 flex items-center justify-center border border-1 h-10 w-12 rounded-[4px] px-1 hover:border-[#00665C] hover:text-[#00665C] @if ($day['day'] == $today && $day['month'] == $month) border-[#00665C] text-[#00665C] font-semibold @elseif ($day['day'] < $today &&  $day['month'] == $month || $day['month'] < $month) line-through disabled cursor-not-allowed border-none bg-gray-100 text-[#959ba7] @endif @if($day['day'] < $today &&  $day['month'] > $month) bg-white text-[#5a606c] opacity-75 @endif" wire:click="dayClicked({{ $day['day'] }})">
+            {{ $day['day'] }}
+            @if ($clickedDay == $day['day'])
+                <div class="bg-[#00665C] text-white text-xs absolute top-0 right-0 p-1 rounded-bl-md rounded-tr-md">Hello!</div>
+            @endif
         </div>
       @else
         <div class="aspect-square  flex items-center justify-center bg-gray-200 hover:border-[#00665C] hover:text-[#00665C]">
             <button class="relative bg-gray-100 px-[4px] rounded-sm flex flex-col items-center justify-center w-12 h-10 text-sm   border border-[#00665C]">
                 {{ $day["day"] }}
+
+                @if ($clickedDay == $today)
+                <div class="bg-[#00665C] text-white text-xs absolute  top-0 right-0 p-1 rounded-bl-md rounded-tr-md">
+                    Today
+               </div>
+               @elseif  ($clickedDay > $today +1)
+               <div class="bg-[#00665C] text-white text-xs absolute top-0 right-0 p-1 rounded-bl-md rounded-tr-md">
+                   Tomorrow
+              </div>
+                @else ($clickedDay == $day['day'])
+                <div class="bg-[#00665C] text-white text-xs absolute top-0 right-0 p-1 rounded-bl-md rounded-tr-md">
+                    {{ $selectedMonthName}} {{$day['day']}}
+                </div>
+            @endif
                 <span class="mb-1"></span>
                     <div class="absolute bottom-0 left-0 right-0 bg-black h-1/3 rounded-b-sm flex items-center justify-center">
                         <span class="text-white text-xs py-1 px-2 text-center">{{$percentage}}</span>
