@@ -5,24 +5,30 @@ use Livewire\Component;
 
 class Calendar extends Component
 {
-    public $year ;
-    public $month ;
-    public $selectedMonth;
-    public $selectedYear;
-    public $today;
-    public $days =[];
-    public $disabledMonth;
-
-public function mount(){
-$this->year =date('Y');
-$this->month=date('m');
-$this->today = date('d');
-$this->selectedMonth = date('m');
-$this->days =$this->getDaysInMonth();
-$this->disableddMonth = date('m') -1;
 
 
 
+
+
+public $year;
+public $selectedMonth;
+public $selectedMonthName; // New property to hold month abbreviation
+public $today;
+public $days = [];
+public $month ;
+public $clickedDay =null;
+public $percentage ;
+
+public function mount()
+{
+    $this->year = date('Y');
+    $this->today = date('d');
+    $this->selectedMonth = date('n'); // Use numerical month value (1-12)
+    $this->selectedMonthName = date('M'); // Set the initial month abbreviation
+    $this->days = $this->getDaysInMonth();
+    $this->month = date('n');
+    $this->clickedDay = null;
+    $this->percentage = 50;
 }
     public function render()
     {
@@ -30,7 +36,10 @@ $this->disableddMonth = date('m') -1;
 
     }
 
-    public function next() {
+
+
+      public function next()
+      {
         $this->year = date('Y');
         $this->selectedMonth = $this->selectedMonth + 1;
 
@@ -39,10 +48,16 @@ $this->disableddMonth = date('m') -1;
             $this->year++;
         }
 
+        $this->selectedMonthName = date('M', mktime(0, 0, 0, $this->selectedMonth, 1)); // Update month abbreviation
         $this->days = $this->getDaysInMonth();
-    }
+      }
 
-    public function previous() {
+      public function previous()
+    {
+        $currentYear = date('Y');
+        $currentMonth = date('n'); //  numerical month value (1-12)
+
+        if ($this->selectedMonth > $currentMonth) {
         $this->selectedMonth -= 1;
 
         if ($this->selectedMonth < 1) {
@@ -50,7 +65,13 @@ $this->disableddMonth = date('m') -1;
             $this->year--;
         }
 
+        $this->selectedMonthName = date('M', mktime(0, 0, 0, $this->selectedMonth, 1)); // Update month abbreviation
         $this->days = $this->getDaysInMonth();
+        }
+    }
+    public function dayClicked($day){
+
+        $this->dayClicked =$day;
     }
 
 
@@ -59,7 +80,6 @@ $this->disableddMonth = date('m') -1;
         $firstDay = $this->year . '-' . $this->selectedMonth . '-01';
         $dayOfWeek = date('w', strtotime($firstDay));
         $days = [];
-        $percentage = 50;
         // Calculate how many days from the previous month need to be shown
         $daysInPrevMonth = date('t', strtotime('-1 month', strtotime($firstDay)));
         $prevMonthStart = $daysInPrevMonth - $dayOfWeek + 2;
@@ -93,10 +113,9 @@ $this->disableddMonth = date('m') -1;
 
             $nextMonthDay++;
         }
-        foreach ($days as &$day) {
-            $day['percentage'] = $percentage;
-        }
+
 
         return $days;
     }
+
 }

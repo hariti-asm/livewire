@@ -1,5 +1,5 @@
 <div class="flex flex-col justify-center items-center text-[#272a2f]">
-    <div class="w-full max-w-[400px] rounded-md shadow-sm translate-y-1 translate-x-[-0.0625rem] border border-black">
+    <div class="w-full max-w-[400px] rounded-md shadow-sm translate-y-1 translate-x-[-0.0625rem] border">
         <div class="  bg-gray-100">
             <div class="px-4 pt-4 pb-2">
             <h2 class="font-semibold">Find a table</h2>
@@ -12,7 +12,6 @@
             </span>
           </div>
 
-          <h2>selected month:{{$selectedMonth}}</h2>
 
           <div class="flex justify-between bg-[#EEF6F2]  mx-4 my-1 rounded-md ">
 <div class="flex relative">
@@ -63,7 +62,7 @@
             wire:click="previous">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 ejhntxf0"><path fill-rule="evenodd" d="M15.749 20.5c-.24 0-.48-.086-.673-.26l-8.249-7.496a1 1 0 0 1 0-1.479l8.249-7.504a1 1 0 0 1 1.346 1.478l-7.436 6.765 7.436 6.756a1.002 1.002 0 0 1-.673 1.74" ></path></svg>
         </button>
-    <h2 class="text-center font-semibold" >{{ $selectedMonth }} - {{ $year }}</h2>
+    <h2 class="text-center font-semibold" >{{ $selectedMonthName }} - {{ $year }}</h2>
         <button class="" wire:click="next">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e10xbrur0"><path fill-rule="evenodd" d="M8.25 20.5a1.002 1.002 0 0 1-.673-1.74l7.436-6.756-7.436-6.765a1 1 0 1 1 1.346-1.478l8.249 7.504a1 1 0 0 1 0 1.479L8.923 20.24c-.193.174-.433.26-.673.26"></path></svg>
 
@@ -88,13 +87,19 @@
     <div class="grid grid-cols-7 gap-1  px-4 ">
       @foreach ($days as $day)
         @if(!empty($day))
-        <div class="aspect-square gap-1 flex items-center justify-center border border-1 h-10 w-12 rounded-[4px]  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C]  text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through disabled cursor-not-allowed border-none  @endif
+        <div class="aspect-square gap-1 flex items-center justify-center border border-1 h-10 w-12 rounded-[4px]  px-1 hover:border-[#00665C] hover:text-[#00665C]  @if ($day["day"] == $today && $day["month"] == $month) border-[#00665C]  text-[#00665C] font-semibold @elseif ($day["day"] < $today &&  $day["month"] == $month || $day["month"] < $month )  line-through disabled cursor-not-allowed border-none bg-gray-100 text-[#959ba7]  @endif
         @if($day["day"] < $today &&  $day["month"] > $month )  bg-white text-[#5a606c] opacity-75 @endif">
           {{ $day["day"] }}
         </div>
       @else
         <div class="aspect-square  flex items-center justify-center bg-gray-200 hover:border-[#00665C] hover:text-[#00665C]">
-          {{ $day["day"] }}
+            <button class="relative bg-gray-100 px-[4px] rounded-sm flex flex-col items-center justify-center w-12 h-10 text-sm   border border-[#00665C]">
+                {{ $day["day"] }}
+                <span class="mb-1"></span>
+                    <div class="absolute bottom-0 left-0 right-0 bg-black h-1/3 rounded-b-sm flex items-center justify-center">
+                        <span class="text-white text-xs py-1 px-2 text-center">{{$percentage}}</span>
+                    </div>
+                </button>
         </div>
         @endif
       @endforeach
