@@ -52,18 +52,25 @@ public function mount()
     }
 
 
-      public function previous()
-      {
-          if ($this->selectedMonth > 1) {
-              $this->selectedMonth--;
-          } else {
-              $this->selectedMonth = 12;
-              $this->year--;
-          }
+    public function previous()
+    {
+        $currentYear = date('Y');
+        $currentMonth = date('n'); // numerical month value (1-12)
 
-          $this->selectedMonthName = date('M', mktime(0, 0, 0, $this->selectedMonth, 1)); // Update month abbreviation
-          $this->days = $this->getDaysInMonth();
-      }
+        if ($this->year > $currentYear || ($this->year == $currentYear && $this->selectedMonth > $currentMonth)) {
+            $this->selectedMonth--;
+
+            if ($this->selectedMonth < 1) {
+                $this->selectedMonth = 12;
+                $this->year--;
+            }
+
+            $this->selectedMonthName = date('M', mktime(0, 0, 0, $this->selectedMonth, 1)); // Update month abbreviation
+            $this->days = $this->getDaysInMonth();
+        }
+    }
+
+
 
     public function dayClicked($day){
 

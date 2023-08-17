@@ -96,21 +96,21 @@
             {{ $day['day'] }}
     @else
     <span class="mb-1">{{$day["day"]}}</span>
-        <div class="absolute bottom-0 left-0 right-0 bg-black h-1/3 rounded-b-sm flex items-center justify-center">
+        <div class="absolute bottom-0 left-0 right-0 bg-black h-1/3 rounded-b-[4px] flex items-center justify-center">
             <span class="text-white text-[10px] py-1 px-2 text-center">{{ $percentage }}</span>
         </div>
     @endif
 
             @if ($clickedDay == $day['day'])
-                <div class="bg-[#00665C] text-white text-xs absolute top-0 right-0 p-1 rounded-bl-md rounded-tr-md">Hello!</div>
+                <div class="bg-[#00665C] text-white text-xs absolute top-0 right-0 p-1 rounded-bl-[4px] rounded-tr-md">Hello!</div>
             @endif
         </div>
       @else
         <div class="aspect-square  flex items-center justify-center bg-gray-200 hover:border-[#00665C] hover:text-[#00665C]">
-            <button class="relative bg-gray-100 px-[4px] rounded-sm flex flex-col items-center justify-center w-12 h-10 text-sm   border border-[#00665C]">
+            <button class="relative bg-gray-100 px-[6px] rounded-[4px] flex flex-col items-center justify-center w-12 h-10 text-sm   border border-[#00665C]">
 
                     <span class="mb-1">{{$day["day"]}}</span>
-                    <div class="absolute bottom-0 left-0 right-0 bg-black h-1/3 rounded-b-sm flex items-center justify-center">
+                    <div class="absolute bottom-0 left-0 right-0 bg-black h-1/3 rounded-b-[4px] flex items-center justify-center">
                         <span class="text-white text-xs py-1 px-2 text-center">{{$percentage}}</span>
 
                     </div>
@@ -128,9 +128,7 @@
                 </div>
             @endif --}}
 
-                    {{-- <div class="absolute bottom-0 left-0 right-0 bg-black h-1/3 rounded-b-sm flex items-center justify-center">
-                        <span class="text-white text-xs py-1 px-2 text-center">{{$percentage}}</span>
-                    </div> --}}
+
                 </button>
         </div>
         @endif
